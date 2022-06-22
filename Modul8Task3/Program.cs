@@ -8,15 +8,15 @@ namespace Modul8Task3
     {
         static void Main(string[] args)
         {
-            string folder = @"D:\Temp";             //  отладочная информация, затереть перед сдачей
             long folderSize = 0;
             int countDelFiles = 0 ;
             int countDelDirs = 0;
-            long asumDelSize = 0;
+            long sumDelSize = 0;
+            DateTime oldDate = DateTime.Now.AddMinutes(-30);
 
             // Ввод и провека папки на существование
-            Console.WriteLine("Введите директорию для расчёта занимаемого места :");
-            //folder = Console.ReadLine();
+            Console.WriteLine("Введите директорию для удаления устаревшей информации :");
+            string folder = Console.ReadLine();
 
             if (!Directory.Exists(folder))
             {
@@ -29,6 +29,8 @@ namespace Modul8Task3
             Console.WriteLine("Размер директории " + folder + " : " + folderSize);
 
             // чего т вызвать нужно =========================
+            DeleteFolder(folder, oldDate, ref countDelFiles, ref countDelDirs, ref sumDelSize);
+            Console.WriteLine("Удалено " + countDelFiles +" файлов и " + countDelDirs +" директорий. Всего удалено байт: " + sumDelSize);
 
             folderSize = 0;
             GetDirSize(folder, ref folderSize);
